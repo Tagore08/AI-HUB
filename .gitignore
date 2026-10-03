@@ -1,16 +1,23 @@
-# Secrets
+# Secrets & Credentials
 .env
 *.key
 *.pem
 id_rsa*
 credentials*
 tokens*
+*.secret
+
+# Private Terms / Redaction Lists
+PRIVATE_TERMS.txt
 
 # OS Junk
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# Temp files
+# Temp & Editor Files
 *.tmp
 *.bak
 *~
+*.swp
+*.swo

@@ -1,22 +1,35 @@
 # AI-HUB Agents Guide
-Last reviewed: 2026-10-02
 
-**AI-HUB** is a structured environment designed to provide AI agents with consistent rules, context, and project history to produce reliable work.
+**Last reviewed**: 2026-10-03  
+**Authority**: `INSTRUCTIONS/CANONICAL.md` is the single source of truth.
+
+Welcome to AI-HUB. This map guides AI agents to the correct context.
+
+---
 
 ## Directory Map
-- **INSTRUCTIONS/**: Core rules (`MASTER_RULES.md`) and boundaries (`PERMISSIONS.md`).
-- **KNOWLEDGE/**: Reusable facts, tutorials, and general information.
-- **PROJECTS/**: Isolated workspaces for distinct goals.
-- **PROMPTS/**: Standardized formats for tasks and roles.
 
-## How to Pick Relevant Context
-Read only what you need. Start with the user's prompt, review `MASTER_RULES.md`, then consult the specific project folder named in the prompt. Ignore unrelated projects or deep knowledge files unless explicitly requested.
+- **`INSTRUCTIONS/`**: Core behavior rules.
+  - `CANONICAL.md`: Master rules and context priorities.
+  - `PERMISSIONS.md`: Allowed vs. forbidden actions.
+  - `CODING_RULES.md`, `RESEARCH_RULES.md`, `WRITING_RULES.md`, `ANALYSIS_RULES.md`, `AGENT_RULES.md`: Domain-specific standards.
+  - `PORTABLE_PREAMBLE.md`: Session bootstrap for chat apps.
+- **`PROJECTS/`**: Isolated project workspaces.
+  - `TEMPLATES/PROJECT_TEMPLATE/`: Starter scaffolding.
+  - `ACTIVE/`: Currently active projects.
+  - `ARCHIVED/`: Completed or deprecated projects.
+- **`PROMPTS/`**: Reusable task and role templates (`STANDARD_TASK_CONTEXT.md`, `ROLES.md`).
+- **`KNOWLEDGE/`**: Reusable reference material and cross-project documentation.
+- **`INDEX/`**: Catalogs and keyword lookup maps.
+- **`SCRIPTS/`**: Deterministic helper utilities (standard library only).
+- **`OUTPUTS/`**: Final deliverables and generated reports.
 
-## Context Hierarchy
-Source files outrank summaries. If a summary contradicts the actual code or data, trust the source file.
+---
 
-## Recording Decisions
-Always record important choices, architectures, or pivots in the project's `DECISIONS.md` file.
+## Agent Navigation Order
 
-## Handling Uncertainty
-If information is missing, ambiguous, or unverifiable, mark it clearly as **UNKNOWN**. Do not invent facts or guess user intent without asking for clarification first.
+1. Read `INSTRUCTIONS/CANONICAL.md` for foundational rules.
+2. Read the active project folder named in the user request (e.g., `PROJECTS/ACTIVE/<project>/AGENTS.md`).
+3. If no project is named, read only the specific files directly cited by the user.
+4. Mark unverified claims as `UNKNOWN`. Never invent paths or facts.
+5. Log progress in the project's `CURRENT_STATE.md` and session actions in `SETUP_LOG.md`.
