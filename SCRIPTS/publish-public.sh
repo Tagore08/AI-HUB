@@ -8,7 +8,7 @@ PUBLIC="/home/tag01/AI-HUB-PUBLIC"
 [ -d "$PUBLIC/.git" ]  || { echo "ERROR: $PUBLIC not a git repo"; exit 1; }
 
 echo ">> Wiping public mirror (except .git)..."
-find "$PUBLIC" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+find "$PUBLIC" -mindepth 1 -maxdepth 1 ! -name .git ! -name README.md -exec rm -rf {} +
 
 echo ">> Copying safe files..."
 for f in AGENTS.md START_HERE.md MAINTENANCE.md SECRETS_POLICY.md .gitignore; do
@@ -20,6 +20,7 @@ done
 mkdir -p "$PUBLIC/PROJECTS" "$PUBLIC/KNOWLEDGE"
 [ -d "$PRIVATE/PROJECTS/TEMPLATES" ] && cp -r "$PRIVATE/PROJECTS/TEMPLATES" "$PUBLIC/PROJECTS/"
 [ -f "$PRIVATE/KNOWLEDGE/README.md" ] && cp "$PRIVATE/KNOWLEDGE/README.md" "$PUBLIC/KNOWLEDGE/"
+[ -f "$PRIVATE/PUBLIC_README.md" ] && cp "$PRIVATE/PUBLIC_README.md" "$PUBLIC/README.md"
 
 echo ">> Safety scan for secrets..."
 if grep -rIE "(api[_-]?key|password|secret|bearer)[[:space:]]*[:=][[:space:]]*['\"]?[A-Za-z0-9_/-]{16,}" "$PUBLIC" --exclude-dir=.git 2>/dev/null; then
